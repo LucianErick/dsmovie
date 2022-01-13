@@ -1,5 +1,4 @@
 import { MovieScore } from "../MovieScore";
-import { MovieStars } from "../MovieStars";
 import * as S from "./styles";
 
 const movie = {
@@ -14,7 +13,7 @@ const movie = {
 export const MovieCard = () => {
   return (
     <S.Container>
-      <img src={movie.image} />
+      <img src={movie.image} alt={movie.title}/>
       <S.Title>{movie.title}</S.Title>
       <MovieScore movie={movie} />
     </S.Container>

@@ -1,15 +1,19 @@
 package com.projects.DSMovie.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_movie")
 public class Movie {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,6 +21,16 @@ public class Movie {
     private Double score;
     private Integer count;
     private String image;
+
+    /*
+     * O id.movie se deve ao fato de usarmos uma classe incorporada para gerar a
+     * chave primária da classe Score, no caso a classe ScorePK.
+     * id é o objeto da composição de ScorePK em Score. e movie é a referencia para
+     * a classe Movie em ScorePK.
+     */
+
+    @OneToMany(mappedBy = "id.movie")
+    private Set<Score> scoreList = new HashSet<>();
 
     public Movie() {
     }
@@ -67,5 +81,13 @@ public class Movie {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public Set<Score> getScoreList() {
+        return scoreList;
+    }
+
+    public void setScoreList(Set<Score> scoreList) {
+        this.scoreList = scoreList;
     }
 }

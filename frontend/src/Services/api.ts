@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { Movie } from "../Types/movie";
 import { MoviePage } from "../Types/moviePage";
 
@@ -23,3 +23,18 @@ export const getMovieById = async (id: string) => {
   });
   return response as Movie;
 };
+
+export const saveScore = async (movieId: string, email: string, score: number) => {
+    const config: AxiosRequestConfig = {
+        baseURL: BASE_URL,
+        method: 'PUT',
+        url: '/scores',
+        data: {
+            email: email,
+            movieId: movieId,
+            score: score
+        }
+    }
+    
+    api(config).then(res => res.data)
+}

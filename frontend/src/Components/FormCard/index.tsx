@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { getMovieById } from "../../Services/api";
+import { SyntheticEvent, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { getMovieById, saveScore } from "../../Services/api";
 import { Movie } from "../../Types/movie";
+import { validateEmail } from "../../utils";
 import * as S from "./styles";
 
 type Props = {
@@ -9,6 +10,8 @@ type Props = {
 };
 
 export const FormCard = ({ movieId }: Props) => {
+  const navigate = useNavigate();
+
   const [movie, setMovie] = useState<Movie>({
     id: 0,
     title: "",
@@ -17,11 +20,27 @@ export const FormCard = ({ movieId }: Props) => {
     image: "",
   });
 
+  const saveAndRedirect = async (email: string, score: number) => {
+    await saveScore(movieId, email, score);
+    navigate("/");
+  };
+
+  const handleSubmit = async (event: SyntheticEvent) => {
+    event.preventDefault();
+    const form = event.target as any;
+
+    const email = form.email.value;
+    const score = form.score.value;
+
+    validateEmail(email) && score != "Selecione um valor"
+      ? saveAndRedirect(email, score)
+      : alert("Insira os dados corretamente.");
+  };
+
   useEffect(() => {
     const loadData = async () => {
       const movieData = await getMovieById(movieId);
       setMovie(movieData);
-      console.log(movieData);
     };
 
     loadData();
@@ -32,7 +51,7 @@ export const FormCard = ({ movieId }: Props) => {
       <S.InfoContainer>
         <img src={movie.image} alt={movie.title} />
         <h3>{movie.title}</h3>
-        <S.FormContainer>
+        <S.FormContainer onSubmit={handleSubmit}>
           <S.FormGroup>
             <label htmlFor="email">Informe seu email</label>
             <input type="email" className="form-control" id="email" />

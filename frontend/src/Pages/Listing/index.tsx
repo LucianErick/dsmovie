@@ -21,11 +21,14 @@ export const Listing = () => {
     empty: true,
   });
 
+  const handlePageChange = (pageNumber: number) => {
+    setPageNumber(pageNumber);
+  };
+
   useEffect(() => {
     const loadAll = async () => {
       const list = await getAllMovies(pageNumber, pageSize);
       setPage(list);
-      console.log(list);
     };
 
     loadAll();
@@ -33,13 +36,7 @@ export const Listing = () => {
 
   return (
     <>
-      <Pagination
-        currentPage={pageNumber}
-        totalPages={page ? page.totalPages : 0}
-        handleNextPage={() => {}}
-        handlePreviousPage={() => {}}
-        setPageHandle={setPageNumber}
-      />
+      <Pagination page={page} onChange={handlePageChange} />
       <S.Container>
         <S.GridContainer>
           {page?.content.map((movie, index, array) => {

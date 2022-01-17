@@ -44,7 +44,7 @@ export const Listing = () => {
         <S.GridContainer>
           {page?.content.map((movie, index, array) => {
             return (
-              <S.GridItem>
+              <S.GridItem key={index}>
                 <MovieCard movie={movie} />
               </S.GridItem>
             );

@@ -5,15 +5,41 @@ import {
 
 import * as S from "./styles";
 
-export const Pagination = () => {
+type Props = {
+  currentPage: number;
+  totalPages: number;
+  handleNextPage: () => void;
+  handlePreviousPage: () => void;
+  setPageHandle: (page: number) => void;
+};
+
+export const Pagination = ({
+  currentPage,
+  totalPages,
+  setPageHandle,
+}: Props) => {
+  const handleNextPage = () => {
+    setPageHandle(++currentPage);
+  };
+
+  const handlePreviousPage = () => {
+    setPageHandle(--currentPage);
+  };
+
   return (
     <S.Container>
       <S.Box>
-        <button disabled={true}>
+        <button
+          disabled={currentPage === 0 ? true : false}
+          onClick={handlePreviousPage}
+        >
           <ArrowLeft size="1.5rem" color="#4d41c0" />
         </button>
-        <p>{`${1} de ${3}`}</p>
-        <button disabled={false}>
+        <p>{`${currentPage + 1} de ${totalPages}`}</p>
+        <button
+          disabled={currentPage + 1 === totalPages ? true : false}
+          onClick={handleNextPage}
+        >
           <ArrowRight size="1.5rem" color="#4d41c0" />
         </button>
       </S.Box>

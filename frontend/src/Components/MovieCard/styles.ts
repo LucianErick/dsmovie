@@ -3,9 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 240px;
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  align-items: center;
   background-color: #fff;
   padding-bottom: 1.5rem;
   border-radius: 12px;
@@ -14,7 +12,7 @@ export const Container = styled.div`
   @media (max-width: 840px) {
     width: 260px;
   }
-  
+
   @media (max-width: 580px) {
     width: 280px;
   }
@@ -28,6 +26,10 @@ export const Container = styled.div`
 export const Title = styled.p`
   font-weight: 500;
   font-size: 1.05rem;
-  padding: 0.75rem 0 0.25rem 0;
   color: #444;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  padding: 0.5rem 0.75rem;
 `;

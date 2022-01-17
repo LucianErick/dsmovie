@@ -8,7 +8,7 @@ export const Container = styled.div`
 `;
 
 export const Score = styled.p`
-  margin-bottom: 0.65rem;
+  margin-bottom: 0.25rem;
   width: 100%;
   text-align: center;
   font-size: 0.8rem;

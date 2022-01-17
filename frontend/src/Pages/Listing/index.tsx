@@ -2,13 +2,12 @@ import { useEffect, useState } from "react";
 import { MovieCard } from "../../Components/MovieCard";
 import { Pagination } from "../../Components/Pagination";
 import { getAllMovies } from "../../Services/api";
-import { Movie } from "../../Types/movie";
 import { MoviePage } from "../../Types/moviePage";
 import * as S from "./styles";
 
 export const Listing = () => {
   const [pageNumber, setPageNumber] = useState(0);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize] = useState(10);
   const [page, setPage] = useState<MoviePage>({
     content: [],
     last: true,
@@ -32,7 +31,7 @@ export const Listing = () => {
     };
 
     loadAll();
-  }, [pageNumber]);
+  }, [pageNumber, pageSize]);
 
   return (
     <>

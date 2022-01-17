@@ -32,7 +32,7 @@ export const FormCard = ({ movieId }: Props) => {
     const email = form.email.value;
     const score = form.score.value;
 
-    validateEmail(email) && score != "Selecione um valor"
+    validateEmail(email) && score !== "Selecione um valor"
       ? saveAndRedirect(email, score)
       : alert("Insira os dados corretamente.");
   };

@@ -3,23 +3,19 @@ import { MovieStars } from "../MovieStars";
 import * as S from "./styles";
 
 type Props = {
-  movie: {
-    id: number;
-    image: string;
-    title: string;
-    count: number;
-    score: number;
-  };
+  id: string | number,
+  score: number,
+  count: number,
 };
 
-export const MovieScore = ({ movie }: Props) => {
+export const MovieScore = ({ id, score, count }: Props) => {
   return (
     <S.Container>
-      <S.Score>{movie.score}</S.Score>
-      <MovieStars />
-      <S.Ratings>{movie.count} avaliações</S.Ratings>
+      <S.Score>{score}</S.Score>
+      <MovieStars score={score} />
+      <S.Ratings>{count} avaliações</S.Ratings>
       <S.Button>
-        <Link to={`/form/${movie.id}`}>
+        <Link to={`/form/${id}`}>
           <button>Avaliar</button>
         </Link>
       </S.Button>

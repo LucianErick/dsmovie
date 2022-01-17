@@ -11,7 +11,7 @@ export const MovieCard = ({ movie }: Props) => {
     <S.Container>
       <img src={movie.image} alt={movie.title} />
       <S.Title>{movie.title}</S.Title>
-      <MovieScore movie={movie} />
+      <MovieScore score={movie.score} count={movie.count} id={movie.id} />
     </S.Container>
   );
 };
